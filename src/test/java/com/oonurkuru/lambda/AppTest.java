@@ -19,9 +19,7 @@ import static org.mockito.Mockito.when;
 public class AppTest {
 
     private App app;
-
-    @Mock
-    Context mockContext;
+    private Context mockContext;
 
     @Mock
     APIGatewayProxyRequestEvent mockRequest;
@@ -29,6 +27,7 @@ public class AppTest {
     @Before
     public void beforeEachTest() {
         app = new App();
+        mockContext = new TestContext();
     }
 
     @Test
