@@ -7,6 +7,7 @@ public class ApiGatewayProxyResponse implements Serializable {
     private String name;
 
     public ApiGatewayProxyResponse() {
+        name = "Anonymous";
     }
 
     public ApiGatewayProxyResponse(String name) {

@@ -14,6 +14,11 @@ public class App implements RequestHandler<APIGatewayProxyRequestEvent, ApiGatew
     @Override
     public ApiGatewayProxyResponse handleRequest(APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent, Context context) {
         Map<String, String> requestParameters = apiGatewayProxyRequestEvent.getQueryStringParameters();
+
+        if (requestParameters == null || requestParameters.get("name") == null) {
+            return new ApiGatewayProxyResponse();
+        }
+
         return new ApiGatewayProxyResponse(requestParameters.get("name"));
     }
 }
