@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Says Hello By Query String
+Resources:
+  HelloFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: aws-codepipeline-lambda
+      Handler: com.oonurkuru.lambda.App::handleRequest
+      Runtime: java8
+      CodeUri: target//aws-codepipeline-1.0-SNAPSHOT.jar
+      Policies:
+        - AWSLambdaExecute
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: GET
