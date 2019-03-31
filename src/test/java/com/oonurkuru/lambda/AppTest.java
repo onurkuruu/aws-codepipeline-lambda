@@ -2,7 +2,8 @@ package com.oonurkuru.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
-import com.oonurkuru.lambda.core.ApiGatewayProxyResponse;
+import com.oonurkuru.lambda.core.Response;
+import com.oonurkuru.lambda.core.ResponseBody;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,20 +33,21 @@ public class AppTest {
 
     @Test
     public void appCanResponseCorrectly() {
+        ResponseBody responseBody = new ResponseBody("Onur");
         Map<String, String> queryParameters = new HashMap<>();
         queryParameters.put("name", "Onur");
 
         when(mockRequest.getQueryStringParameters()).thenReturn(queryParameters);
-        ApiGatewayProxyResponse response = app.handleRequest(mockRequest, mockContext);
+        Response response = app.handleRequest(mockRequest, mockContext);
 
-        assertEquals(response.getName(), "Onur");
+        assertEquals(response.getBody(), responseBody.toString());
     }
 
     public void appCanWorkWithoutQueryParameters() {
-
+        ResponseBody responseBody = new ResponseBody();
         when(mockRequest.getQueryStringParameters()).thenReturn(null);
-        ApiGatewayProxyResponse response = app.handleRequest(mockRequest, mockContext);
+        Response response = app.handleRequest(mockRequest, mockContext);
 
-        assertEquals(response.getName(), "Anonymous");
+        assertEquals(response.getBody(), responseBody.toString());
     }
 }
