@@ -15,6 +15,8 @@ public class App implements RequestHandler<APIGatewayProxyRequestEvent, ApiGatew
     public ApiGatewayProxyResponse handleRequest(APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent, Context context) {
         Map<String, String> requestParameters = apiGatewayProxyRequestEvent.getQueryStringParameters();
 
+        context.getLogger().log(apiGatewayProxyRequestEvent.toString());
+
         if (requestParameters == null || requestParameters.get("name") == null) {
             return new ApiGatewayProxyResponse();
         }
